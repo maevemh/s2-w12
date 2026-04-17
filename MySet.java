@@ -13,14 +13,49 @@ public class MySet{
         System.out.println(isIn);
         isIn = contains(132);
         System.out.println(isIn);
+
+        boolean removing=removeAll(132);
+        System.out.println(removing);
+        System.out.println(myElements);
+
     }
 
     public boolean contains(int x){
+        for(int e: myElements){
+            if(x==e)
+                return true;
+
+
+        }
+        return false;
    
     }
 
     public boolean containsHelper(int value, int index){
+        if(index == myElementCount)
+            return false;
+        else if(value==myElements[index])
+            return true;
+        return containsHelper(value, index+1);
        
+    }
+    public boolean removeAll(int x){
+        return removeHelper(x, 0);
+    }
+
+    public boolean removeHelper(int value, int index){
+        if(index == myElementCount)
+            return false;
+        else if(value==myElements[index]){
+            for(int d=index; d<myElementCount-1; d++){
+                myElements[d]=myElements[d+1];
+            }
+            myElementCount--;
+            return true;
+
+        }  
+        return containsHelper(value, index+1);
+
     }
     
     public String toString(){
